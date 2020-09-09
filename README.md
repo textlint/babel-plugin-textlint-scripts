@@ -2,6 +2,9 @@
 
 A babel plugin for textlint-scripts.
 
+- Generate `meta` data for the rule automatically
+- Convert TypeScript's `Option` type to JSON Schema
+
 ## Example
 
 **In**

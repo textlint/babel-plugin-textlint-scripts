@@ -1,6 +1,6 @@
-# babel-plugin-textlint-script
+# babel-plugin-textlint-scripts
 
-A babel plugin for textlint-script.
+A babel plugin for textlint-scripts.
 
 ## Example
 
@@ -21,7 +21,7 @@ A babel plugin for textlint-script.
 ## Installation
 
 ```sh
-$ npm install babel-plugin-textlint-script
+$ npm install babel-plugin-textlint-scripts
 ```
 
 ## Usage
@@ -32,20 +32,20 @@ $ npm install babel-plugin-textlint-script
 
 ```json
 {
-  "plugins": ["textlint-script"]
+  "plugins": ["textlint-scripts"]
 }
 ```
 
 ### Via CLI
 
 ```sh
-$ babel --plugins textlint-script script.js
+$ babel --plugins textlint-scripts script.js
 ```
 
 ### Via Node API
 
 ```javascript
 require("babel-core").transform("code", {
-  plugins: ["textlint-script"]
+  plugins: ["textlint-scripts"]
 });
 ```

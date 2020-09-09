@@ -1,25 +1,40 @@
 import fs from "fs";
-import path from "path";
+import pathUtil from "path";
 import template from "@babel/template";
 import * as TJS from "typescript-json-schema";
+import {
+    parse
+} from "comment-json";
 
 const settings = {
     required: true,
 };
 const log = (...args) => {
-    console.log("[babel-plugin-textlint-script]", ...args);
+    console.log("[babel-plugin-textlint-scripts]", ...args);
 }
+
 const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
+const resolveApp = relativePath => pathUtil.resolve(appDirectory, relativePath);
 export default function ({ types: t }) {
-    const compilerOptions = require(resolveApp("tsconfig.json")).compilerOptions;
-    const pkg = require(resolveApp("package.json"))
     return {
         visitor: {
             Program(path, state) {
                 try {
                     const filePath = state.file.opts.filename;
-                    console.log(filePath);
+                    if (!filePath) {
+                        return;
+                    }
+                    const tsconfigJsonFilePath = resolveApp("tsconfig.json");
+                    if (!fs.existsSync(tsconfigJsonFilePath)) {
+                        return;
+                    }
+                    const tsconfigJson = parse(fs.readFileSync(tsconfigJsonFilePath, "utf-8"));
+                    const compilerOptions = tsconfigJson.compilerOptions;
+                    const pkg = require(resolveApp("package.json"));
+                    // Skip non-ts files
+                    if (pathUtil.extname(filePath) !== ".ts") {
+                        return;
+                    }
                     const program = TJS.getProgramFromFiles(
                         [filePath],
                         compilerOptions
@@ -37,7 +52,7 @@ export const meta = {
                     const ast = def({
                         NAME: t.stringLiteral(pkg.name || ""),
                         DESCRIPTION: t.stringLiteral(pkg.description || ""),
-                        HOMEPAGE: pkg.homepage ? t.stringLiteral(pkg.homepage) : undefined,
+                        HOMEPAGE: t.stringLiteral(pkg.homepage || ""),
                         SCHEMA: schemaTemplate()
                     });
                     path.pushContainer('body', ast);

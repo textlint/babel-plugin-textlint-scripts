@@ -1,8 +1,9 @@
 {
-  "name": "@textlint/babel-plugin-textlint-script",
+  "name": "@textlint/babel-plugin-textlint-scripts",
   "version": "0.0.0",
-  "description": "A babel plugin for textlint-script.",
+  "description": "A babel plugin for textlint-scripts.",
   "author": "azu <azuciao@gmail.com>",
+  "homepage": "https://github.com/textlint/babel-plugin-textlint-scripts",
   "main": "lib/index.js",
   "devDependencies": {
     "@babel/cli": "^7.0.0",
@@ -28,6 +29,7 @@
   ],
   "dependencies": {
     "@babel/template": "^7.10.4",
-    "typescript-json-schema": "^0.43.0"
+    "typescript-json-schema": "^0.43.0",
+    "comment-json": "^4.0.6"
   }
 }

@@ -4,6 +4,7 @@
   "description": "A babel plugin for textlint-scripts.",
   "author": "azu <azuciao@gmail.com>",
   "homepage": "https://github.com/textlint/babel-plugin-textlint-scripts",
+  "license": "MIT",
   "main": "lib/index.js",
   "devDependencies": {
     "@babel/cli": "^7.0.0",

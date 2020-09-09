@@ -5,7 +5,10 @@ import * as TJS from "typescript-json-schema";
 import { parse } from "comment-json";
 
 const settings = {
-    required: true
+    // required by default
+    required: true,
+    // additionalProperties: true by default
+    noExtraProps: true
 };
 const log = (...args) => {
     console.log("[babel-plugin-textlint-scripts]", ...args);

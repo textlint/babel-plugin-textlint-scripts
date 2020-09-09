@@ -19,9 +19,11 @@ export const meta = {
               "c": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         },
+        "additionalProperties": false,
         "required": ["b"]
       },
       "d": {
@@ -32,6 +34,7 @@ export const meta = {
         "type": "number"
       }
     },
+    "additionalProperties": false,
     "required": ["d", "e"],
     "$schema": "http://json-schema.org/draft-07/schema#"
   }

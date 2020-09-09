@@ -14,6 +14,7 @@ export const meta = {
         "type": "string"
       }
     },
+    "additionalProperties": false,
     "required": ["str_key"],
     "$schema": "http://json-schema.org/draft-07/schema#"
   }

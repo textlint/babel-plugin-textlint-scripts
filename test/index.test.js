@@ -11,14 +11,21 @@ function trim(str) {
 describe("A babel pluin for textlint-scripts.", () => {
     const fixturesDir = path.join(__dirname, "fixtures");
     fs.readdirSync(fixturesDir).map((caseName) => {
-        it(`should ${caseName.split("-").join(" ")}`, () => {
+        it(`should ${caseName.split("-").join(" ")}`, function () {
             const fixtureDir = path.join(fixturesDir, caseName);
             const actualPath = path.join(fixtureDir, "actual.ts");
             const actual = transformFileSync(actualPath).code;
+            const expectedFilePath = path.join(fixtureDir, "expected.js");
 
-            const expected = fs.readFileSync(path.join(fixtureDir, "expected.js")).toString();
-
-            assert.equal(trim(actual), trim(expected));
+            // Usage: update snapshots
+            // UPDATE_SNAPSHOT=1 npm test
+            if (!fs.existsSync(expectedFilePath) || process.env.UPDATE_SNAPSHOT) {
+                fs.writeFileSync(expectedFilePath, actual, "utf-8");
+                this.skip(); // skip when updating snapshots
+                return;
+            }
+            const expected = fs.readFileSync(expectedFilePath).toString();
+            assert.strictEqual(trim(actual), trim(expected));
         });
     });
 });

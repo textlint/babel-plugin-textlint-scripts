@@ -21,6 +21,7 @@
     "clean": "rm -rf lib",
     "build": "babel src -d lib",
     "test": "mocha \"test/*.test.js\"",
+    "updateSnapshot": "UPDATE_SNAPSHOT=1 npm test",
     "test:watch": "npm run test -- --watch",
     "prepublish": "npm run clean && npm run build",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\""

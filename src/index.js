@@ -35,7 +35,11 @@ export default function ({ types: t }) {
                     }
                     const program = TJS.getProgramFromFiles([filePath], compilerOptions);
                     const schema = TJS.generateSchema(program, "Options", settings);
+                    if (!schema) {
+                        return;
+                    }
                     const schemaTemplate = template.expression(JSON.stringify(schema, null, 4));
+
                     const def = template`\
 export const meta = { 
     name: NAME,

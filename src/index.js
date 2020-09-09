@@ -2,19 +2,17 @@ import fs from "fs";
 import pathUtil from "path";
 import template from "@babel/template";
 import * as TJS from "typescript-json-schema";
-import {
-    parse
-} from "comment-json";
+import { parse } from "comment-json";
 
 const settings = {
-    required: true,
+    required: true
 };
 const log = (...args) => {
     console.log("[babel-plugin-textlint-scripts]", ...args);
-}
+};
 
 const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = relativePath => pathUtil.resolve(appDirectory, relativePath);
+const resolveApp = (relativePath) => pathUtil.resolve(appDirectory, relativePath);
 export default function ({ types: t }) {
     return {
         visitor: {
@@ -35,11 +33,8 @@ export default function ({ types: t }) {
                     if (pathUtil.extname(filePath) !== ".ts") {
                         return;
                     }
-                    const program = TJS.getProgramFromFiles(
-                        [filePath],
-                        compilerOptions
-                    );
-                    const schema = TJS.generateSchema(program, "Options", settings)
+                    const program = TJS.getProgramFromFiles([filePath], compilerOptions);
+                    const schema = TJS.generateSchema(program, "Options", settings);
                     const schemaTemplate = template.expression(JSON.stringify(schema, null, 4));
                     const def = template`\
 export const meta = { 
@@ -55,9 +50,9 @@ export const meta = {
                         HOMEPAGE: t.stringLiteral(pkg.homepage || ""),
                         SCHEMA: schemaTemplate()
                     });
-                    path.pushContainer('body', ast);
+                    path.pushContainer("body", ast);
                 } catch (error) {
-                    log("Error", error)
+                    log("Error", error);
                 }
             }
         }

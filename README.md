@@ -47,7 +47,7 @@ export const meta = {
 ## Installation
 
 ```sh
-$ npm install babel-plugin-textlint-scripts
+$ npm install @textlint/babel-plugin-textlint-scripts
 ```
 
 ## Usage
@@ -58,7 +58,7 @@ $ npm install babel-plugin-textlint-scripts
 
 ```json
 {
-  "plugins": ["textlint-scripts"]
+  "plugins": ["@textlint/textlint-scripts"]
 }
 ```
 
@@ -72,7 +72,7 @@ $ babel --plugins textlint-scripts script.js
 
 ```javascript
 require("babel-core").transform("code", {
-  plugins: ["textlint-scripts"]
+  plugins: ["@textlint/textlint-scripts"]
 });
 ```
 
